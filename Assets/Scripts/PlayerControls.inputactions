@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Fastfall",
+                    "type": "Value",
+                    "id": "4b055d1e-7a25-48da-91a4-0ecdbdaf1b3b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -396,6 +405,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Nair",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8979584e-d6eb-4a51-8b09-e1496513787d",
+                    "path": "<XInputController>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fastfall",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

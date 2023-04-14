@@ -4,73 +4,62 @@ using UnityEngine;
 
 public class AttacksPinkGuy : MonoBehaviour , MoveInterface
 {   
-    public void lightAttack()
-    {
-
-    }
-
-    void MoveInterface.BAir()
+    public void BAir()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.DAir()
+    public void DAir()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.DSmash()
+    public void DSmash()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.dTilt()
+    public void DTilt()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.FAir()
+    public void FAir()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.FSmash()
+    public void FSmash()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.FTilt()
+    public void FTilt()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.Jab()
+    public void Jab()
+    {
+        Debug.Log("Jabbed");
+    }
+
+    public void NAir()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.NAir()
+    public void UpAir()
     {
         throw new System.NotImplementedException();
     }
 
-    void MoveInterface.UpAir()
+    public void UpSmash()
     {
         throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void MoveInterface.UpSmash()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    void MoveInterface.UpTilt()
+    public void UpTilt()
     {
         throw new System.NotImplementedException();
     }

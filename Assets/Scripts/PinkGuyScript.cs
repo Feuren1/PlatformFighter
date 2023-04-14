@@ -8,6 +8,7 @@ public class PinkGuyScript : MonoBehaviour
     public float standingHeight = 1f;
     public float crouchHeight = 0.5f;
     public float groundCheckDistance = 0.1f;
+    public float fastFallSpeed = 5f;
     public LayerMask groundLayerMask;
     public Animator animator;
 
@@ -16,6 +17,7 @@ public class PinkGuyScript : MonoBehaviour
     [SerializeField] private bool isGrounded = false;
     private Rigidbody2D rb;
     private PlayerControls playerControls;
+    private AttacksPinkGuy attacksPinkGuy;
 
     private void Awake()
     {
@@ -55,28 +57,32 @@ public class PinkGuyScript : MonoBehaviour
     }
     private void HandleMove()
     {
-        bool jabbedAlready = false;
+
         if (IsGrounded())
         {
-            if (playerControls.Gameplay.Jab.triggered && jabbedAlready==false)
+            if (playerControls.Gameplay.Jab.triggered)
             {
-                Debug.Log("Jabbed");
-                jabbedAlready = true;
+                attacksPinkGuy.Jab();
+                
+
                 //animator.SetTrigger("Jab");
             }
 
             if (playerControls.Gameplay.Uptilt.triggered)
-            {
+            {   
+                attacksPinkGuy.UpTilt();
                 Debug.Log("Uptilted");
                 //animator.SetTrigger("Uptilt");
             }
             if (playerControls.Gameplay.Ftilt.triggered)
             {
+                attacksPinkGuy.FTilt();
                 Debug.Log("Ftilted");
                 //animator.SetTrigger("Ftilt");
             }
             if (playerControls.Gameplay.Dtilt.triggered)
             {
+                attacksPinkGuy.DTilt();
                 Debug.Log("Dtilted");
                 //animator.SetTrigger("Dtilt");
             }
@@ -86,21 +92,25 @@ public class PinkGuyScript : MonoBehaviour
         {
             if (playerControls.Gameplay.Nair.triggered)
             {
+                attacksPinkGuy.NAir();
                 Debug.Log("Naired");
                 //animator.SetTrigger("Uptilt");
             }
             if (playerControls.Gameplay.Upair.triggered)
             {
+                attacksPinkGuy.UpAir();
                 Debug.Log("Upaired");
                 //animator.SetTrigger("Ftilt");
             }
             if (playerControls.Gameplay.Dair.triggered)
             {
+                attacksPinkGuy.DAir();
                 Debug.Log("Daired");
                 //animator.SetTrigger("Dtilt");
             }
             if (playerControls.Gameplay.Fair.triggered)
             {
+                attacksPinkGuy.DTilt();
                 Debug.Log("Faired");
                 //animator.SetTrigger("Dtilt");
             }
@@ -140,7 +150,14 @@ public class PinkGuyScript : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }
-
+    private void HandleFastfall()
+    {
+        if(playerControls.Gameplay.Fastfall.triggered)
+        {
+            Debug.Log("Fastfalling");
+            rb.velocity = new Vector2(rb.velocity.x, fastFallSpeed);
+        }
+    }
     private void ResetRotation()
     {
         // Set rotation to zero
@@ -149,7 +166,8 @@ public class PinkGuyScript : MonoBehaviour
 
     // Check if character is grounded
     private bool IsGrounded()
-    {
+    {   
+        //needs to be changed works for all layers but should be doent with physics2D.raycast....
         if (rb.IsTouchingLayers(Physics2D.AllLayers))
         {
             isGrounded = true;
@@ -159,13 +177,5 @@ public class PinkGuyScript : MonoBehaviour
             isGrounded = false;
             return false;
         }
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayerMask);
-        //Debug.DrawRay(transform.position, Vector2.down * groundCheckDistance, Color.green);
-        //if(hit.collider != null)
-        //{
-        //    isGrounded = true;
-        //    return true;
-        //}
-        //else return false;
     }
 }

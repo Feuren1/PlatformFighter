@@ -10,7 +10,7 @@ public interface MoveInterface{
 
     public void FTilt();
 
-    public void dTilt();
+    public void DTilt();
 
     public void UpSmash();
 
