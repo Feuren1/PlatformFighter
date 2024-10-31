@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PinkGuyScript : MonoBehaviour
+public class NinjaGuyScript : MonoBehaviour
 {
     // Inspector variables
     public float moveSpeed = 5f;
@@ -16,7 +18,7 @@ public class PinkGuyScript : MonoBehaviour
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private bool isGrounded = false;
     private Rigidbody2D rb;
-    private PlayerControls playerControls; 
+    private PlayerControls playerControls;
     private AttacksPinkGuy attacksPinkGuy;
 
 
@@ -38,8 +40,8 @@ public class PinkGuyScript : MonoBehaviour
     }
 
     private void Update()
-    {   
-        
+    {
+
         HandleMovement();
         HandleJump();
         HandleCrouch();
@@ -47,7 +49,7 @@ public class PinkGuyScript : MonoBehaviour
         IsGrounded();
         HandleMove();
         HandleFastfall();
-        
+
     }
 
     private void HandleMovement()
@@ -66,14 +68,15 @@ public class PinkGuyScript : MonoBehaviour
         {
             if (playerControls.Gameplay.Jab.triggered)
             {
-                attacksPinkGuy.Jab();
                 
+                attacksPinkGuy.Jab();
+
 
                 //animator.SetTrigger("Jab");
             }
 
             if (playerControls.Gameplay.Uptilt.triggered)
-            {   
+            {
                 attacksPinkGuy.UpTilt();
                 Debug.Log("Uptilted");
                 //animator.SetTrigger("Uptilt");
@@ -90,7 +93,7 @@ public class PinkGuyScript : MonoBehaviour
                 Debug.Log("Dtilted");
                 //animator.SetTrigger("Dtilt");
             }
-            
+
         }
         else
         {
@@ -132,7 +135,7 @@ public class PinkGuyScript : MonoBehaviour
                 if (IsGrounded())
                 {
                     // Crouch
-                    
+
                     isCrouching = true;
                 }
             }
@@ -157,17 +160,17 @@ public class PinkGuyScript : MonoBehaviour
 
     private void HandleFastfall()
     {
-    // Check if character is not grounded
-    if (!IsGrounded())
-    {
-        // Check if fastfall input is triggered and character is at the apex of the jump
-         if (playerControls.Gameplay.Fastfall.triggered && rb.velocity.y < 0.0001f)
-        { 
-            Debug.Log("Fastfalling");
-            rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed); // Set negative velocity on y-axis for fast falling
+        // Check if character is not grounded
+        if (!IsGrounded())
+        {
+            // Check if fastfall input is triggered and character is at the apex of the jump
+            if (playerControls.Gameplay.Fastfall.triggered && rb.velocity.y < 0.0001f)
+            {
+                Debug.Log("Fastfalling");
+                rb.velocity = new Vector2(rb.velocity.x, -fastFallSpeed); // Set negative velocity on y-axis for fast falling
+            }
         }
     }
-}
 
     private void ResetRotation()
     {
@@ -177,14 +180,15 @@ public class PinkGuyScript : MonoBehaviour
 
     // Check if character is grounded
     private bool IsGrounded()
-    {   
+    {
         //needs to be changed works for all layers but should be doent with physics2D.raycast....
         if (rb.IsTouchingLayers(Physics2D.AllLayers))
         {
             isGrounded = true;
             return true;
         }
-        else { 
+        else
+        {
             isGrounded = false;
             return false;
         }

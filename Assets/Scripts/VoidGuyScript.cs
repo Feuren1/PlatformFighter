@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class PinkGuyScript : MonoBehaviour
+public class VoidGuyScript : MonoBehaviour
 {
-    // Inspector variables
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float standingHeight = 1f;
@@ -12,7 +11,6 @@ public class PinkGuyScript : MonoBehaviour
     public LayerMask groundLayerMask;
     public Animator animator;
 
-    // Private variables
     [SerializeField] private bool isCrouching = false;
     [SerializeField] private bool isGrounded = false;
     private Rigidbody2D rb;
@@ -38,24 +36,21 @@ public class PinkGuyScript : MonoBehaviour
     }
 
     private void Update()
-    {   
-        
+    {
+        HandleMove();
         HandleMovement();
         HandleJump();
         HandleCrouch();
         ResetRotation();
         IsGrounded();
-        HandleMove();
+        
         HandleFastfall();
         
     }
 
     private void HandleMovement()
     {
-        // Get horizontal input from left stick
         Vector2 moveDirection = playerControls.Gameplay.Move.ReadValue<Vector2>();
-
-        // Apply movement to character
         Vector2 moveVelocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
         rb.velocity = moveVelocity;
     }
@@ -66,7 +61,7 @@ public class PinkGuyScript : MonoBehaviour
         {
             if (playerControls.Gameplay.Jab.triggered)
             {
-                attacksPinkGuy.Jab();
+                animator.SetTrigger("Jab");
                 
 
                 //animator.SetTrigger("Jab");
